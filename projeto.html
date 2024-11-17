@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conversor de Temperatura Simplificado</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: white;
+      transition: background-color 0.5s;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+
+    .inputField {
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Conversor de Temperatura</h1>
+    <input type="number" class="inputField" id="temperatureInput" placeholder="Digite a temperatura">
+
+  
+    <select class="inputField" id="conversionType">
+      <option value="CtoF">Celsius para Fahrenheit</option>
+      <option value="FtoC">Fahrenheit para Celsius</option>
+      <option value="CtoK">Celsius para Kelvin</option>
+      <option value="KtoC">Kelvin para Celsius</option>
+      <option value="FtoK">Fahrenheit para Kelvin</option>
+      <option value="KtoF">Kelvin para Fahrenheit</option>
+    </select>
+
+    <button onclick="convertTemperature()">Converter</button>
+
+    <div class="result" id="resultText">Resultado: -</div>
+  </div>
+
+  <script>
+    function convertTemperature() {
+      let temp = parseFloat(document.getElementById('temperatureInput').value);
+      let conversionType = document.getElementById('conversionType').value;
+      let result;
+
+      if (isNaN(temp)) {
+        alert("Por favor, insira um número válido.");
+        return;
+      }
+      switch (conversionType) {
+        case "CtoF":
+          result = (temp * 9/5 + 32).toFixed(2);
+          break;
+        case "FtoC":
+          result = ((temp - 32) * 5/9).toFixed(2);
+          break;
+        case "CtoK":
+          result = (temp + 273.15).toFixed(2);
+          break;
+        case "KtoC":
+          result = (temp - 273.15).toFixed(2);
+          break;
+        case "FtoK":
+          result = ((temp - 32) * 5/9 + 273.15).toFixed(2);
+          break;
+        case "KtoF":
+          result = ((temp - 273.15) * 9/5 + 32).toFixed(2);
+          break;
+        default:
+          result = "Conversão inválida";
+      }
+
+      document.getElementById('resultText').innerText = `Resultado: ${result}°`;
+
+      if (temp < 10) {
+        document.body.style.backgroundColor = "lightblue"; // Frio
+      } else if (temp > 30) {
+        document.body.style.backgroundColor = "lightcoral"; // Quente
+      } else {
+        document.body.style.backgroundColor = "yellow"; // Ameno
+      }
+    }
+  </script>
+<p><center>Baseado nas fórmulas disponíveis em  <a href="https://www.nist.gov/" target="_blank">NIST.gov</a>
+</center></p>
+</body>
+</html>
+
+
+
+
